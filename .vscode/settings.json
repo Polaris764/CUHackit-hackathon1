@@ -1,0 +1,9 @@
+{
+	"liveServer.settings.host": "OTLC.com",
+	"liveServer.settings.https": {
+		"enable": true,
+		"cert": "/home/brown/Code/CUhackit/cert.pem",
+		"key": "/home/brown/Code/CUhackit/key.pem",
+		"passphrase": "Guise-Untruth-Recollect3-Expletive-Nacho-Unlikable"
+	}
+}
