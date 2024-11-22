@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://y6hjmqmp048u"]
+
+[ext_resource type="Script" path="res://main_map.gd" id="1_ab1b7"]
+[ext_resource type="Texture2D" uid="uid://ldgrptvn6ahy" path="res://art/map.png" id="2_tlb2g"]
+[ext_resource type="Texture2D" uid="uid://cispi3q7txwv6" path="res://icon.svg" id="2_w0rvc"]
+[ext_resource type="PackedScene" uid="uid://dumtd5odtb2c1" path="res://tower_menu.tscn" id="4_kf7ou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01hjk"]
+size = Vector2(128, 128)
+
+[sub_resource type="Curve2D" id="Curve2D_fifrk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1103, 4692, 0, 0, 0, 0, 1119, 2051, 0, 0, 0, 0, 2232, 1996, 0, 0, 0, 0, 2212, -2162, 0, 0, 0, 0, 615, -2177, 0, 0, 0, 0, 630, -4238)
+}
+point_count = 6
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_ab1b7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Map" type="Sprite2D" parent="."]
+position = Vector2(393, 174)
+scale = Vector2(10, 10)
+texture = ExtResource("2_tlb2g")
+
+[node name="Forest" type="Sprite2D" parent="."]
+self_modulate = Color(0.426349, 0.715588, 0, 1)
+position = Vector2(-1016, -479)
+scale = Vector2(1.6875, 1.64063)
+texture = ExtResource("2_w0rvc")
+
+[node name="Area2D" type="Area2D" parent="Forest"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest/Area2D"]
+position = Vector2(0, -0.609558)
+shape = SubResource("RectangleShape2D_01hjk")
+
+[node name="water_area" type="Area2D" parent="."]
+position = Vector2(-434, 717)
+scale = Vector2(14.7969, 6.79688)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water_area"]
+polygon = PackedVector2Array(-141.786, -667.071, -140.975, -444.322, -163.953, -437.112, -164.967, -280.423, -43.2523, -281.6, -7.56915, -58.262, -4.25765, 222.308, -28.9926, 521.71, -228.764, 541.131, -222.614, -723.714, -140.975, -729.305)
+
+[node name="enemy_path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_fifrk")
+
+[node name="tower_menu" parent="." instance=ExtResource("4_kf7ou")]

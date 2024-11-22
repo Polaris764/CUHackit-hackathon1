@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://djydnk1qsmfui"]
+
+[ext_resource type="Script" path="res://money.gd" id="1_h48nl"]
+
+[node name="warning_holder" type="VBoxContainer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_bottom = 60.0
+grow_horizontal = 0
+
+[node name="difficulty" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Level: 0
+"
+
+[node name="health" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Health: 50
+"
+
+[node name="money" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Money: $$$"
+script = ExtResource("1_h48nl")

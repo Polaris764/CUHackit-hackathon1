@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cax760tt5oua5"]
+
+[ext_resource type="PackedScene" uid="uid://csqe72njv0inu" path="res://tower.tscn" id="1_dqc56"]
+[ext_resource type="Script" path="res://deer_tower.gd" id="2_fhsei"]
+[ext_resource type="Texture2D" uid="uid://bi3qtu1yqbhg3" path="res://art/deer (2).png" id="3_7aket"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgxr3"]
+atlas = ExtResource("3_7aket")
+region = Rect2(0, 0, 130, 130)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hkdxb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgxr3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_73lfs"]
+radius = 200.0
+
+[node name="deer_tower" instance=ExtResource("1_dqc56")]
+scale = Vector2(3, 3)
+script = ExtResource("2_fhsei")
+
+[node name="sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_hkdxb")
+animation = &"default"
+
+[node name="range" type="Area2D" parent="." index="2" groups=["towerR"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range" index="0"]
+shape = SubResource("CircleShape2D_73lfs")
+
+[node name="attack_timer" type="Timer" parent="." index="3"]
+
+[node name="delay_attack" type="Timer" parent="." index="4"]
+
+[connection signal="area_entered" from="range" to="." method="_on_range_area_entered"]
+[connection signal="area_exited" from="range" to="." method="_on_range_area_exited"]
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="delay_attack" to="." method="_on_delay_attack_timeout"]

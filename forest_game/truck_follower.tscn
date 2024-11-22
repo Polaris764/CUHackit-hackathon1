@@ -1,0 +1,106 @@
+[gd_scene load_steps=14 format=3 uid="uid://dltdl2855wjic"]
+
+[ext_resource type="Script" path="res://truck_follower.gd" id="1_s1ev1"]
+[ext_resource type="Texture2D" uid="uid://bkobg6qus3fmx" path="res://art/truck.png" id="1_sx4oh"]
+[ext_resource type="Texture2D" uid="uid://dsqqlqlucubt3" path="res://art/smoke particles.png" id="2_y8k0p"]
+[ext_resource type="AudioStream" uid="uid://d2q222dmr57tp" path="res://audio/Car hurt.mp3" id="4_uxp0j"]
+[ext_resource type="AudioStream" uid="uid://blqrgohtd2w4o" path="res://audio/truck death.wav" id="5_2xiv2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shwax"]
+atlas = ExtResource("1_sx4oh")
+region = Rect2(0, 0, 600, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5k632"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shwax")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8qq5"]
+atlas = ExtResource("2_y8k0p")
+region = Rect2(0, 0, 76, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p0e4"]
+atlas = ExtResource("2_y8k0p")
+region = Rect2(76, 0, 76, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwymf"]
+atlas = ExtResource("2_y8k0p")
+region = Rect2(152, 0, 76, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt211"]
+atlas = ExtResource("2_y8k0p")
+region = Rect2(228, 0, 76, 153)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8cpw1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8qq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p0e4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwymf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt211")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nl020"]
+radius = 102.0
+height = 440.0
+
+[node name="truck_follower" type="PathFollow2D"]
+position = Vector2(0, 40)
+scale = Vector2(2, 2)
+script = ExtResource("1_s1ev1")
+speed = 60
+health = 6
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(77, 48)
+sprite_frames = SubResource("SpriteFrames_5k632")
+animation = &"walk"
+autoplay = "walk"
+offset = Vector2(-77, -130)
+
+[node name="smoke" type="AnimatedSprite2D" parent="sprite"]
+visible = false
+position = Vector2(-369.5, -509)
+sprite_frames = SubResource("SpriteFrames_8cpw1")
+frame = 1
+frame_progress = 0.931614
+offset = Vector2(218, 270)
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(5, -84)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nl020")
+
+[node name="death_timer" type="Timer" parent="."]
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_uxp0j")
+volume_db = -25.0
+pitch_scale = 0.64
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2xiv2")
+volume_db = -10.0
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]

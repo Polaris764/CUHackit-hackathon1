@@ -1,0 +1,156 @@
+[gd_scene load_steps=18 format=3 uid="uid://y6hjmqmp048u"]
+
+[ext_resource type="Script" path="res://main_map.gd" id="1_ab1b7"]
+[ext_resource type="Texture2D" uid="uid://dfc6f25l06deg" path="res://art/game screen.png" id="2_enrkl"]
+[ext_resource type="PackedScene" uid="uid://dd1jimwbhpwj7" path="res://enemy.tscn" id="4_d1r4n"]
+[ext_resource type="PackedScene" uid="uid://dumtd5odtb2c1" path="res://tower_menu.tscn" id="4_kf7ou"]
+[ext_resource type="PackedScene" uid="uid://djydnk1qsmfui" path="res://warning_holder.tscn" id="5_85v7l"]
+[ext_resource type="AudioStream" uid="uid://blgnoy8bjhtyt" path="res://audio/Game Sound.mp3" id="6_mka72"]
+[ext_resource type="Texture2D" uid="uid://ok8x0orv8tbh" path="res://art/game screen (1).png" id="6_ximvo"]
+[ext_resource type="Texture2D" uid="uid://bjdt8bpdif8x" path="res://art/BG2.png" id="7_awppa"]
+[ext_resource type="Script" path="res://tutorial_sprite.gd" id="7_thib6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01hjk"]
+size = Vector2(128, 128)
+
+[sub_resource type="Curve2D" id="Curve2D_fifrk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1130, 3516, 0, 0, 0, 0, 1119, 2051, 0, 0, 0, 0, 2232, 1996, 0, 0, 0, 0, 2212, -2162, 0, 0, 0, 0, 615, -2177, 0, 0, 0, 0, 630, -4238)
+}
+point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bswur"]
+size = Vector2(295, 1936)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqqwx"]
+size = Vector2(1627, 279)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytsqp"]
+size = Vector2(290, 4220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mutsf"]
+size = Vector2(1162, 314)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngepn"]
+size = Vector2(272, 2069)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uu3p6"]
+size = Vector2(3155, 9902)
+
+[node name="main" type="Node2D" groups=["main"]]
+script = ExtResource("1_ab1b7")
+
+[node name="Map" type="Sprite2D" parent="."]
+position = Vector2(393, 174)
+scale = Vector2(10, 10)
+texture = ExtResource("2_enrkl")
+
+[node name="Forest" type="Sprite2D" parent="."]
+position = Vector2(638, -2842)
+scale = Vector2(5, 4.861)
+
+[node name="forest_area" type="Area2D" parent="Forest" groups=["forest"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest/forest_area"]
+position = Vector2(0, -0.609558)
+shape = SubResource("RectangleShape2D_01hjk")
+
+[node name="water_area" type="Area2D" parent="." groups=["water_area"]]
+position = Vector2(-434, 717)
+scale = Vector2(14.7969, 6.79688)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="water_area"]
+polygon = PackedVector2Array(-146.788, -673.103, -147.396, -456.68, -170.914, -445.646, -171.928, -261.738, -44.5364, -259.089, -32.3041, -61.2046, -16.6251, -27.0712, -14.8004, 208.919, -35.0749, 337.066, -34.8046, 527.154, -228.764, 541.131, -222.614, -723.714, -140.975, -729.305)
+
+[node name="enemy_path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_fifrk")
+
+[node name="path_follower" parent="enemy_path" instance=ExtResource("4_d1r4n")]
+position = Vector2(1130, 3516)
+rotation = -1.5783
+
+[node name="menu_canvas" type="CanvasLayer" parent="."]
+
+[node name="tower_menu" parent="menu_canvas" instance=ExtResource("4_kf7ou")]
+
+[node name="warning_holder" parent="menu_canvas" instance=ExtResource("5_85v7l")]
+
+[node name="bgMusic" type="AudioStreamPlayer2D" parent="menu_canvas"]
+stream = ExtResource("6_mka72")
+volume_db = -20.0
+autoplay = true
+
+[node name="path_area" type="Area2D" parent="." groups=["path_area"]]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="path_area"]
+position = Vector2(639.5, -2970)
+shape = SubResource("RectangleShape2D_bswur")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="path_area"]
+position = Vector2(1587, -2150.5)
+shape = SubResource("RectangleShape2D_jqqwx")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="path_area"]
+position = Vector2(2243, 48)
+shape = SubResource("RectangleShape2D_ytsqp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="path_area"]
+position = Vector2(1556, 2011)
+shape = SubResource("RectangleShape2D_mutsf")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="path_area"]
+position = Vector2(1127, 3187.5)
+shape = SubResource("RectangleShape2D_ngepn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(402, -4)
+zoom = Vector2(0.1, 0.1)
+
+[node name="off_area" type="Area2D" parent="." groups=["off_area"]]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="off_area"]
+position = Vector2(-5177.5, -40)
+shape = SubResource("RectangleShape2D_uu3p6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="off_area"]
+position = Vector2(5975, 88)
+shape = SubResource("RectangleShape2D_uu3p6")
+
+[node name="Lspawning_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Tspawning_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="difficulty_timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="spawn_location" type="Marker2D" parent="."]
+position = Vector2(1137, 4445)
+
+[node name="tutorial_sprite" type="Sprite2D" parent="."]
+position = Vector2(411, 742)
+scale = Vector2(10, 10)
+texture = ExtResource("6_ximvo")
+script = ExtResource("7_thib6")
+
+[node name="Timer" type="Timer" parent="tutorial_sprite"]
+wait_time = 5.0
+autostart = true
+
+[node name="BG" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(300, 300)
+texture = ExtResource("7_awppa")
+
+[connection signal="timeout" from="Lspawning_timer" to="." method="_on_lspawning_timer_timeout"]
+[connection signal="timeout" from="Tspawning_timer" to="." method="_on_tspawning_timer_timeout"]
+[connection signal="timeout" from="difficulty_timer" to="." method="_on_difficulty_timer_timeout"]
+[connection signal="timeout" from="tutorial_sprite/Timer" to="tutorial_sprite" method="_on_timer_timeout"]

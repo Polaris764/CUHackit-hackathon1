@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpo0l7nvmad0x"]
+
+[ext_resource type="Texture2D" uid="uid://bboynj63hifym" path="res://art/slash.png" id="1_jn68e"]
+[ext_resource type="Script" path="res://slash.gd" id="2_pogmy"]
+
+[node name="slash" type="Sprite2D"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_jn68e")
+script = ExtResource("2_pogmy")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

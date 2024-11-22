@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjcm7ft2b0vg0"]
+
+[ext_resource type="PackedScene" uid="uid://csqe72njv0inu" path="res://tower.tscn" id="1_l1vbg"]
+[ext_resource type="Script" path="res://turtle_tower.gd" id="2_qhklo"]
+[ext_resource type="Texture2D" uid="uid://dc7i1b7guism5" path="res://art/turtle.png" id="2_x6ttp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38nng"]
+atlas = ExtResource("2_x6ttp")
+region = Rect2(0, 5, 128, 122)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evun1"]
+atlas = ExtResource("2_x6ttp")
+region = Rect2(0, 5, 128, 122)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c2re6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38nng")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evun1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fb2jo"]
+radius = 1000.0
+
+[node name="turtle_tower" instance=ExtResource("1_l1vbg")]
+scale = Vector2(3, 3)
+script = ExtResource("2_qhklo")
+
+[node name="sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_c2re6")
+
+[node name="range" type="Area2D" parent="." index="2" groups=["towerR"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="range" index="0" groups=["towerR"]]
+shape = SubResource("CircleShape2D_fb2jo")
+
+[node name="attack_timer" type="Timer" parent="." index="3"]
+wait_time = 1.5
+autostart = true
+
+[connection signal="area_entered" from="range" to="." method="_on_range_area_entered"]
+[connection signal="area_exited" from="range" to="." method="_on_range_area_exited"]
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

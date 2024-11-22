@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://nlp8g7ltig5k"
+path="res://.godot/imported/lumberjack death sound.mp3-eea922a3b41276a0149dd2422f17a495.mp3str"
+
+[deps]
+
+source_file="res://audio/lumberjack death sound.mp3"
+dest_files=["res://.godot/imported/lumberjack death sound.mp3-eea922a3b41276a0149dd2422f17a495.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

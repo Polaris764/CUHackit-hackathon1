@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://r1w4seuplr2o"
+path="res://.godot/imported/tree damage tick.mp3-ac0f62cd8f053557c4afc137efc73152.mp3str"
+
+[deps]
+
+source_file="res://audio/tree damage tick.mp3"
+dest_files=["res://.godot/imported/tree damage tick.mp3-ac0f62cd8f053557c4afc137efc73152.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

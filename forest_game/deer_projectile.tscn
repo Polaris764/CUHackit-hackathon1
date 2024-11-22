@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpq1ykmfvpajb"]
+
+[ext_resource type="Script" path="res://deer_projectile.gd" id="1_xspjl"]
+[ext_resource type="Texture2D" uid="uid://c6kt2q7ic1dhs" path="res://art/deer antler.png" id="2_4d2ao"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kso4x"]
+
+[node name="deer_projectile" type="Area2D"]
+script = ExtResource("1_xspjl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4d2ao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_kso4x")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

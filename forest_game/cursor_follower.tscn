@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://iufeh0w43eym"]
+
+[ext_resource type="Script" path="res://cursor_follower.gd" id="1_qdqnn"]
+[ext_resource type="Texture2D" uid="uid://co2dk0dfhvgo7" path="res://art/range.png" id="2_d6vqb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_67cle"]
+radius = 65.0
+
+[node name="cursor_follower" type="Sprite2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_qdqnn")
+
+[node name="Area2D" type="Area2D" parent="." groups=["tower"]]
+collision_layer = 58
+collision_mask = 58
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_67cle")
+
+[node name="range" type="Sprite2D" parent="."]
+scale = Vector2(45, 45)
+texture = ExtResource("2_d6vqb")

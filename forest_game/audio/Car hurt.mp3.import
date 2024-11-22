@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2q222dmr57tp"
+path="res://.godot/imported/Car hurt.mp3-d6665629e43c0188e5d59e67267ef4fe.mp3str"
+
+[deps]
+
+source_file="res://audio/Car hurt.mp3"
+dest_files=["res://.godot/imported/Car hurt.mp3-d6665629e43c0188e5d59e67267ef4fe.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

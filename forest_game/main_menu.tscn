@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://bawfdyxiw2c44"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_w6upp"]
+[ext_resource type="Texture2D" uid="uid://dofew7eck6jkv" path="res://art/play button.png" id="2_ccy8x"]
+[ext_resource type="Texture2D" uid="uid://nutl0ji0s7s0" path="res://art/game menu final.png" id="2_tq52d"]
+[ext_resource type="Texture2D" uid="uid://ddiywidnulnvm" path="res://art/quit button.png" id="3_2fpj2"]
+[ext_resource type="AudioStream" uid="uid://dd5s7gunil6x1" path="res://audio/Title Screen.mp3" id="5_7j56b"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w6upp")
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 151.0
+offset_top = -46.0
+offset_right = 151.0
+offset_bottom = 295.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_tq52d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -111.0
+offset_right = 389.0
+offset_bottom = 321.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 20
+
+[node name="Play" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_ccy8x")
+
+[node name="Quit" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_2fpj2")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_7j56b")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

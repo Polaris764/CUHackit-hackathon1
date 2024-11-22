@@ -1,0 +1,146 @@
+[gd_scene load_steps=20 format=3 uid="uid://dd1jimwbhpwj7"]
+
+[ext_resource type="Texture2D" uid="uid://dodkltl2aigk2" path="res://art/Woodcutter_death.png" id="2_1s80e"]
+[ext_resource type="Script" path="res://enemy.gd" id="2_buo3p"]
+[ext_resource type="Texture2D" uid="uid://wgid52w6vdlp" path="res://art/Woodcutter_walk.png" id="3_e50tg"]
+[ext_resource type="AudioStream" uid="uid://d3wenr28rnkr8" path="res://audio/lumberjack hit sound.wav" id="4_u3el2"]
+[ext_resource type="AudioStream" uid="uid://nlp8g7ltig5k" path="res://audio/lumberjack death sound.mp3" id="5_oi1yc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl47m"]
+atlas = ExtResource("2_1s80e")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i47vq"]
+atlas = ExtResource("2_1s80e")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi5jf"]
+atlas = ExtResource("2_1s80e")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc3cw"]
+atlas = ExtResource("2_1s80e")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2gsf"]
+atlas = ExtResource("2_1s80e")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2whep"]
+atlas = ExtResource("2_1s80e")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmpwj"]
+atlas = ExtResource("3_e50tg")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvwqw"]
+atlas = ExtResource("3_e50tg")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0dqg"]
+atlas = ExtResource("3_e50tg")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdkmq"]
+atlas = ExtResource("3_e50tg")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuko3"]
+atlas = ExtResource("3_e50tg")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y2ej"]
+atlas = ExtResource("3_e50tg")
+region = Rect2(160, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vm2wb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl47m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i47vq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi5jf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc3cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2gsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2whep")
+}],
+"loop": false,
+"name": &"death",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmpwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvwqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0dqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdkmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuko3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y2ej")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3s8b"]
+radius = 11.0
+height = 34.0
+
+[node name="path_follower" type="PathFollow2D"]
+rotation = -1.5708
+scale = Vector2(10, 10)
+rotates = false
+script = ExtResource("2_buo3p")
+speed = 150
+health = 3
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(23.8, 1.2)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_vm2wb")
+animation = &"walk"
+autoplay = "walk"
+flip_h = true
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(15.9, -0.6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_w3s8b")
+
+[node name="death_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oi1yc")
+volume_db = -25.0
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_u3el2")
+volume_db = -20.0
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://yw2muauxwvys"]
+
+[ext_resource type="Texture2D" uid="uid://c330ny60o5byr" path="res://art/image-removebg-preview.png" id="1_yvmna"]
+[ext_resource type="Script" path="res://hit_sprite.gd" id="2_5iiuj"]
+
+[node name="hit_sprite" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_yvmna")
+script = ExtResource("2_5iiuj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

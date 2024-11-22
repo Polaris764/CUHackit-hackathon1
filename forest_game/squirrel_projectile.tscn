@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl0twgxg785pl"]
+
+[ext_resource type="Script" path="res://squirrel_projectile.gd" id="1_kembe"]
+[ext_resource type="Texture2D" uid="uid://b5pwn36ewf0yr" path="res://art/acorn.png" id="1_up6la"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uulnx"]
+radius = 19.0
+height = 61.3333
+
+[node name="squirrel_projectile" type="Area2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_kembe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_up6la")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_uulnx")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

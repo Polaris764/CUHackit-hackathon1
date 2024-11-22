@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://csqe72njv0inu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qknmm"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_re88p"]
+radius = 65.0308
+
+[node name="tower" type="Node2D"]
+z_index = 1
+z_as_relative = false
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qknmm")
+animation = &"attack"
+
+[node name="Area2D" type="Area2D" parent="." groups=["tower"]]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_re88p")

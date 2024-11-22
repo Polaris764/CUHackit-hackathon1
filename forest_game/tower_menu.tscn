@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dumtd5odtb2c1"]
+
+[ext_resource type="Texture2D" uid="uid://cispi3q7txwv6" path="res://icon.svg" id="1_bix56"]
+[ext_resource type="Script" path="res://tower_menu.gd" id="1_lfip8"]
+
+[node name="tower_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lfip8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.181798, 0.181798, 0.181798, 1)
+layout_mode = 0
+offset_right = 161.0
+offset_bottom = 645.0
+texture = ExtResource("1_bix56")
+
+[node name="tower_button_holder" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 11.0
+offset_right = 155.0
+offset_bottom = 634.0
